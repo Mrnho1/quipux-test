@@ -9,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tb_quipux")
@@ -21,6 +24,17 @@ public class Playlist {
 	
 	private String name;
 	private String description;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("songs")
+	private Songs songs;
+	
+	public Songs getSongs() {
+		return songs;
+	}
+	public void setSongs(Songs songs) {
+		this.songs = songs;
+	}
 	public Long getId() {
 		return id;
 	}
